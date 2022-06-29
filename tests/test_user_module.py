@@ -1,11 +1,6 @@
 import pytest
 from app import app
 from flask import json
-# from server.models.db
-
-
-# @pytest.fixture(scope="module", autouse=True)
-# def test_data_db():
 
 
 class TestUserModule:
