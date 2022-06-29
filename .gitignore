@@ -3,3 +3,5 @@
 *__pycache__/
 *.pytest_cache
 launch.json
+db.py
+tests/__pycache__
