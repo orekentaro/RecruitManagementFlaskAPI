@@ -1,4 +1,3 @@
-import hashlib
 from models.user_master import UserMaster
 from modules.base_module import BaseModule
 
@@ -15,7 +14,7 @@ class UserModule(BaseModule):
         '''
 
         try:
-            password = hashlib.sha256(password.encode('utf-8')).hexdigest()
+            password = cls.pasword_hash(password)
             with cls.session_scope() as db_session:
                 user = db_session.query(UserMaster).filter_by(
                     email=email, password=password).first()

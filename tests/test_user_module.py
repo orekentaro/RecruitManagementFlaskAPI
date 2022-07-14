@@ -18,7 +18,7 @@ class TestUserModule:
     def test_login_succese(self, client):
         with client:
             res = client.post(
-                '/user/login', data={
+                '/login', data={
                     "email": 'kntru0218gj@gmail.com',
                     "password": "1234"
                 })
@@ -28,7 +28,7 @@ class TestUserModule:
     def test_login_failed(self, client):
         with client:
             res = client.post(
-                '/user/login',
+                '/login',
                 data={
                     "email": 'aaa@aaa.aaa',
                     "password": "12345"
@@ -40,7 +40,7 @@ class TestUserModule:
     def test_login_failed2(self, client):
         with client:
             res = client.post(
-                '/user/login', data={
+                '/login', data={
                     "email": 'kntru0218gj@gmail.com',
                     "password": "12345"
                 },
@@ -51,7 +51,7 @@ class TestUserModule:
     def test_login_failed3(self, client):
         with client:
             res = client.post(
-                '/user/login', data={
+                '/login', data={
                     "email": 'kntru0218gj@gmai.com',
                     "password": "1234"
                 },
