@@ -4,7 +4,7 @@ from sqlalchemy import TIMESTAMP, Column, String, Text, ForeignKey
 from models.db import Base, ENGINE
 
 
-class JobSeeker(Base):
+class Memo(Base):
     """求職者情報"""
     __tablename__ = 'memo'
     memo_id = Column('memo_id', String(200), nullable=False, primary_key=True)

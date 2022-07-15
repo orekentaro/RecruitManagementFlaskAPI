@@ -109,3 +109,45 @@ def create_data():
             update_time=now
         )
         db_session.add(decline)
+
+        job_master_id = bm.get_id('job_master_id')
+        job_master = JobMaster(
+            job_master_id=job_master_id,
+            job_offer_name='テスト求人',
+            subscription_cost=100000,
+            create_time=dt.now(),
+            update_time=dt.now(),
+            changer='create'
+        )
+        db_session.add(job_master)
+
+        job_ads_id = bm.get_id('job_ads_id')
+        job_ads = JobAds(
+            job_ads_id=job_ads_id,
+            job_master_id=1,
+            publication_start='20220401',
+            publication_end='20220901',
+            contents="エンジニア募集中",
+            views=200,
+            cost=200,
+            create_time=dt.now(),
+            update_time=dt.now(),
+            changer='create'
+        )
+        db_session.add(job_ads)
+
+        job_id = bm.get_id('job_id')
+        job_seeker = JobSeeker(
+            job_id=job_id,
+            name='テスト太郎',
+            gender="m",
+            birthday="19930218",
+            career='2021年テスト株式会社入社',
+            ads_id=1,
+            create_time=dt.now(),
+            update_time=dt.now(),
+            changer='create'
+            )
+        db_session.add(job_seeker)
+
+    return
