@@ -9,7 +9,7 @@ class JobMaster(Base):
     job_master_id = Column('job_master_id', String(
         200), nullable=False, primary_key=True)
     job_offer_name = Column('job_offer_name', String(200), nullable=False)
-    subscripton_cost = Column('subscripton_cost', BigInteger)
+    subscription_cost = Column('subscription_cost', BigInteger)
     delete_flag = Column('delete_flag', String(1), default="0", nullable=False)
     create_time = Column('cleate_time', TIMESTAMP, nullable=False)
     update_time = Column('update_time', TIMESTAMP, nullable=False)

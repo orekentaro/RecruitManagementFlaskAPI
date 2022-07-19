@@ -19,7 +19,7 @@ class UserMaster(Base):
     auth_id = Column('auth_id', String(200), nullable=False)
     delete_flag = Column('delete_flag', String(1), server_default="0")
     changer = Column('changer', String(200), nullable=False)
-    create_time = Column('cleate_time', TIMESTAMP, nullable=False)
+    create_time = Column('create_time', TIMESTAMP, nullable=False)
     update_time = Column('update_time', TIMESTAMP, nullable=False)
 
 

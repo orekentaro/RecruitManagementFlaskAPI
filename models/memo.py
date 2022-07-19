@@ -1,4 +1,3 @@
-
 import sys
 from sqlalchemy import TIMESTAMP, Column, String, Text, ForeignKey
 from models.db import Base, ENGINE
@@ -9,7 +8,7 @@ class Memo(Base):
     __tablename__ = 'memo'
     memo_id = Column('memo_id', String(200), nullable=False, primary_key=True)
     job_id = Column('job_id', String(200),
-                    ForeignKey('job_ads.ads_id', onupdate='CASCADE',
+                    ForeignKey('job_seeker.job_id', onupdate='CASCADE',
                     ondelete='CASCADE'))
     delete_flag = Column('delete_flag', String(1), default="0", nullable=False)
     memo = Column('memo', Text, nullable=False)
