@@ -3,6 +3,6 @@ class BaseTest:
         with client:
             client.post(
                 '/login', data={
-                    "email": 'kntru0218gj@gmail.com',
-                    "password": "1234"
+                    "email": 'test@test.test',
+                    "password": "password1234"
                     })

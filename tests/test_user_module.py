@@ -19,8 +19,8 @@ class TestUserModule:
         with client:
             res = client.post(
                 '/login', data={
-                    "email": 'kntru0218gj@gmail.com',
-                    "password": "1234"
+                    "email": 'test@test.test',
+                    "password": "password1234"
                 })
             check_json = json.loads(res.get_data())
             assert "success" == check_json['result']

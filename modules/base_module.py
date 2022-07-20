@@ -1,3 +1,4 @@
+from ast import Constant
 import hashlib
 from contextlib import contextmanager
 from models.db import session
@@ -39,3 +40,8 @@ class BaseModule:
     @classmethod
     def pasword_hash(cls, password: str) -> str:
         return hashlib.sha256(password.encode('utf-8')).hexdigest()
+
+    class Constant:
+        DELETE_FLAG_OFF = "0"
+        DELETE_FLAG_ON = "1"
+        GENDER_DICT = {"m": "男性", "f": "女性"}

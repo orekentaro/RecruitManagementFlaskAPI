@@ -159,7 +159,7 @@ def _create_data():
             progress_id=1,
             user_id=1,
             job_id=1,
-            pogress_info='応募がありました',
+            progress_info='応募がありました',
             create_time=dt.now(),
             update_time=dt.now(),
             changer='create'

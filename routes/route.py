@@ -1,5 +1,6 @@
 from flask import Blueprint, make_response, jsonify, session, request
 from modules.user_module import UserModule
+from modules.job_module import JobModule
 
 # ログイン不要ルート
 ln = Blueprint('ln', __name__)
@@ -36,4 +37,11 @@ def login():
         response.set_cookie(
             'user_id', value=res['user'], secure=None, httponly=False)
         session['user_id'] = res['user']
+    return response
+
+
+@lr.route('/job_seeker_list', methods=['GET'])
+def job_seeker_list():
+    res = JobModule.job_seeker_list()
+    response = make_response(res)
     return response

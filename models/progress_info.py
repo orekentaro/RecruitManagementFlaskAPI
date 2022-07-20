@@ -17,7 +17,7 @@ class ProgressInfo(Base):
     job_id = Column('job_id', String(200),
                     ForeignKey('job_seeker.job_id', onupdate='CASCADE',
                     ondelete='CASCADE'))
-    pogress_info = Column('pogress_info', Text, nullable=False)
+    progress_info = Column('progress_info', Text, nullable=False)
     delete_flag = Column('delete_flag', String(1), default="0", nullable=False)
     create_time = Column('cleate_time', TIMESTAMP, nullable=False)
     update_time = Column('update_time', TIMESTAMP, nullable=False)
