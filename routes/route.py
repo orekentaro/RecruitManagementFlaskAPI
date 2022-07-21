@@ -42,6 +42,7 @@ def login():
 
 @lr.route('/job_seeker_list', methods=['GET'])
 def job_seeker_list():
-    res = JobModule.job_seeker_list()
+    conditions = dict(request.args)
+    res = JobModule.job_seeker_list(**conditions)
     response = make_response(res)
     return response

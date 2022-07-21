@@ -1,4 +1,3 @@
-
 from modules.base_module import BaseModule as bm
 from models.job_ads import JobAds
 from models.job_master import JobMaster
@@ -7,6 +6,7 @@ from models.user_master import UserMaster
 from models.progress_master import ProgressMaster
 from models.auth_master import AuthMaster
 from models.progress_info import ProgressInfo
+from models.progress_result import ProgressResult
 from models.memo import Memo
 from datetime import datetime as dt
 from models.db import Base, ENGINE
@@ -113,6 +113,76 @@ def _create_data():
         )
         db_session.add(decline)
 
+        progress_result_id = bm.get_id('progress_result_id')
+        checking = ProgressResult(
+            progress_result_id=progress_result_id,
+            title="選考中",
+            changer="create",
+            create_time=now,
+            update_time=now
+        )
+        db_session.add(checking)
+
+        progress_result_id = bm.get_id('progress_result_id')
+        adjustment = ProgressResult(
+            progress_result_id=progress_result_id,
+            title="日程調整中",
+            changer="create",
+            create_time=now,
+            update_time=now
+        )
+        db_session.add(adjustment)
+
+        progress_result_id = bm.get_id('progress_result_id')
+        schedule = ProgressResult(
+            progress_result_id=progress_result_id,
+            title="予定",
+            changer="create",
+            create_time=now,
+            update_time=now
+        )
+        db_session.add(schedule)
+
+        progress_result_id = bm.get_id('progress_result_id')
+        done = ProgressResult(
+            progress_result_id=progress_result_id,
+            title="実施",
+            changer="create",
+            create_time=now,
+            update_time=now
+        )
+        db_session.add(done)
+
+        progress_result_id = bm.get_id('progress_result_id')
+        cancel = ProgressResult(
+            progress_result_id=progress_result_id,
+            title="キャンセル",
+            changer="create",
+            create_time=now,
+            update_time=now
+        )
+        db_session.add(cancel)
+
+        progress_result_id = bm.get_id('progress_result_id')
+        passing = ProgressResult(
+            progress_result_id=progress_result_id,
+            title="通過",
+            changer="create",
+            create_time=now,
+            update_time=now
+        )
+        db_session.add(passing)
+
+        progress_result_id = bm.get_id('progress_result_id')
+        failure = ProgressResult(
+            progress_result_id=progress_result_id,
+            title="不合格",
+            changer="create",
+            create_time=now,
+            update_time=now
+        )
+        db_session.add(failure)
+
         job_master_id = bm.get_id('job_master_id')
         job_master = JobMaster(
             job_master_id=job_master_id,
@@ -130,6 +200,7 @@ def _create_data():
             job_master_id=1,
             publication_start='20220401',
             publication_end='20220901',
+            title="未経験可",
             contents="エンジニア募集中",
             views=200,
             cost=200,
@@ -160,6 +231,23 @@ def _create_data():
             user_id=1,
             job_id=1,
             progress_info='応募がありました',
+            schedule='20220801',
+            result='1',
+            create_time=dt.now(),
+            update_time=dt.now(),
+            changer='create'
+        )
+        db_session.add(progress_info)
+
+        progress_info_id = bm.get_id('progress_info_id')
+        progress_info = ProgressInfo(
+            progress_info_id=progress_info_id,
+            progress_id=2,
+            user_id=1,
+            job_id=1,
+            progress_info='',
+            schedule='',
+            result=2,
             create_time=dt.now(),
             update_time=dt.now(),
             changer='create'

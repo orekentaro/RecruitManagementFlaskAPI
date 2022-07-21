@@ -13,6 +13,7 @@ class JobAds(Base):
                                       onupdate='CASCADE', ondelete='CASCADE'))
     publication_start = Column('publication_start', String(10))
     publication_end = Column('publication_end', String(10))
+    title = Column('title', Text)
     contents = Column('contents', Text)
     views = Column('views', BigInteger)
     cost = Column('cost', BigInteger)

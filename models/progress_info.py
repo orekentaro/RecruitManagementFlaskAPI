@@ -18,6 +18,10 @@ class ProgressInfo(Base):
                     ForeignKey('job_seeker.job_id', onupdate='CASCADE',
                     ondelete='CASCADE'))
     progress_info = Column('progress_info', Text, nullable=False)
+    schedule = Column('schedule', String(8))
+    result = Column('result', String(200),
+                    ForeignKey('progress_result.progress_result_id',
+                               onupdate='CASCADE', ondelete='CASCADE'))
     delete_flag = Column('delete_flag', String(1), default="0", nullable=False)
     create_time = Column('cleate_time', TIMESTAMP, nullable=False)
     update_time = Column('update_time', TIMESTAMP, nullable=False)
