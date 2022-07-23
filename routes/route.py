@@ -10,6 +10,7 @@ lr = Blueprint('lr', __name__)
 
 @lr.before_request
 def befor_request():
+    # TODO:クッキーの内容や寿命を調整しないといけない
     if 'user_id' not in session:
         return {'result': "not_login"}
     else:
