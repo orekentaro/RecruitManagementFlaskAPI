@@ -33,7 +33,7 @@ def _create_data():
         user_id = bm.get_id('user_id')
         user = UserMaster(
             user_id=user_id,
-            name="test_user",
+            name="テストくん",
             email="test@test.test",
             password=bm.pasword_hash('password1234'),
             auth_id=1,

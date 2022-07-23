@@ -40,9 +40,9 @@ def login():
     return response
 
 
-@lr.route('/job_seeker_list', methods=['GET'])
-def job_seeker_list():
+@lr.route('/job_seeker', methods=['GET'])
+def job_seeker():
     conditions = dict(request.args)
-    res = JobModule.job_seeker_list(**conditions)
+    res = JobModule.get_job_seeker(**conditions)
     response = make_response(res)
     return response

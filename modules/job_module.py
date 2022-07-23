@@ -4,6 +4,7 @@ from models.job_master import JobMaster
 from models.progress_info import ProgressInfo
 from models.progress_master import ProgressMaster
 from models.progress_result import ProgressResult
+from models.memo import Memo
 from modules.base_module import BaseModule
 from sqlalchemy import desc
 
@@ -16,12 +17,13 @@ class JobModule(BaseModule):
     const = BaseModule.Constant
 
     @classmethod
-    def job_seeker_list(cls, **conditions):
+    def get_job_seeker(cls, **conditions):
         with cls.session_scope() as db_session:
             job_seekers = db_session.query(
                 JobSeeker
             ).filter_by(
-                **conditions
+                **conditions,
+                delete_flag=cls.const.DELETE_FLAG_OFF
             ).all()
 
             res_list = []
@@ -56,22 +58,67 @@ class JobModule(BaseModule):
                     ProgressInfo.job_id == job_id,
                     ProgressMaster.delete_flag == cls.const.DELETE_FLAG_OFF,
                     ProgressResult.delete_flag == cls.const.DELETE_FLAG_OFF,
-                ).order_by(
+                )
+
+                progress_all = progress.all()
+                progress_new = progress.order_by(
                     desc(ProgressInfo.progress_id)
                     ).first()
 
                 jm = job.JobMaster
                 ja = job.JobAds
-                pr = progress.ProgressResult
-                pm = progress.ProgressMaster
+                pi = progress_new.ProgressInfo
+                pr = progress_new.ProgressResult
+                pm = progress_new.ProgressMaster
+
+                user = cls.get_user(
+                    **{"user_id": pi.user_id}
+                    ) or {}
+
                 res_dict = {
                     "job_id": job_id,
                     "name": job_seeker.name,
-                    "gender": job_seeker.gender,
+                    "gender": cls.const.GENDER_DICT[job_seeker.gender],
                     "job_ads": jm.job_offer_name,
                     "title": ja.title,
-                    "result": pr.title,
-                    "phase": pm.title
+                    "status": pr.title,
+                    "phase": pm.title,
+                    "corr_person": user.get("name"),
+                    "progress": [],
+                    "memo": []
                 }
+
+                for prg in progress_all:
+                    pi_all = prg.ProgressInfo
+                    pr_all = prg.ProgressResult
+                    pm_all = prg.ProgressMaster
+
+                    user = cls.get_user(
+                        **{"user_id": pi_all.user_id}
+                        ) or {}
+
+                    progress_dict = {
+                        "phase": pm_all.title,
+                        "result": pr_all.title,
+                        "corr_person": user.get("name", ""),
+                        "info": pi_all.progress_info,
+                        "schedule": pi_all.schedule
+                    }
+                    res_dict["progress"].append(progress_dict)
+
+                memos = db_session.query(
+                    Memo
+                    ).filter_by(
+                        job_id=job_id,
+                        delete_flag=cls.const.DELETE_FLAG_OFF
+                    ).all()
+
+                for memo in memos:
+                    memo_dict = {
+                        "create_time": cls.date_to_string(memo.create_time),
+                        "memo": memo.memo
+                    }
+                    res_dict["memo"].append(memo_dict)
+
                 res_list.append(res_dict)
         return {"result": "success", "data": res_list}
