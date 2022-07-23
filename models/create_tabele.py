@@ -261,7 +261,7 @@ def _create_data():
             memo='ちゃんと勉強してそう',
             create_time=dt.now(),
             update_time=dt.now(),
-            changer='create'
+            changer=1
         )
         db_session.add(memo)
 

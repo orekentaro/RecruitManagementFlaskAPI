@@ -116,9 +116,13 @@ class JobModule(BaseModule):
 
                     for memo in memos:
                         create_time = cls.date_to_string(memo.create_time)
+                        user = cls.get_user(
+                            **{"user_id": memo.changer}
+                            ) or {}
                         memo_dict = {
                             "create_time": create_time,
-                            "memo": memo.memo
+                            "memo": memo.memo,
+                            "creater": user.get("name", "")
                         }
                         res_dict["memo"].append(memo_dict)
 

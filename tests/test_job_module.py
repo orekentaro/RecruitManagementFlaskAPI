@@ -4,20 +4,21 @@ from tests.base_test import BaseTest
 from app import app
 
 SUCCESS_DATA = [
-    {
-        "corr_person": "テストくん",
-        "gender": "男性",
-        "job_ads": "テスト求人",
-        "job_id": "1",
-        "memo": [
-            {
-                "create_time": "20220722",
-                "memo": "ちゃんと勉強してそう"
-            }
-        ],
-        "name": "テスト太郎",
-        "phase": "一次面接",
-        "progress": [
+        {
+            "corr_person": "テストくん",
+            "gender": "男性",
+            "job_ads": "テスト求人",
+            "job_id": "1",
+            "memo": [
+                {
+                    "create_time": "20220722",
+                    "creater": "テストくん",
+                    "memo": "ちゃんと勉強してそう"
+                }
+            ],
+            "name": "テスト太郎",
+            "phase": "一次面接",
+            "progress": [
                 {
                     "corr_person": "テストくん",
                     "info": "応募がありました",
@@ -25,18 +26,18 @@ SUCCESS_DATA = [
                     "result": "選考中",
                     "schedule": "20220801"
                 },
-            {
+                {
                     "corr_person": "テストくん",
                     "info": "",
                     "phase": "一次面接",
                     "result": "日程調整中",
                     "schedule": ""
-                    }
-        ],
-        "status": "日程調整中",
-        "title": "未経験可"
-    }
-]
+                }
+            ],
+            "status": "日程調整中",
+            "title": "未経験可"
+        }
+    ]
 
 
 class TestJobModule(BaseTest):
