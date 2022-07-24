@@ -57,7 +57,7 @@ class BaseModule:
     @classmethod
     def date_to_string(cls, date: object) -> str:
         try:
-            return_date = date.strftime('%Y%m%d')
+            return_date = date.strftime('%Y/%m/%d')
         except Exception:
             return_date = None
         return return_date

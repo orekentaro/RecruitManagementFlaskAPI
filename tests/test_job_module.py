@@ -6,13 +6,13 @@ from app import app
 SUCCESS_DATA = [
         {
             "corr_person": "テストくん",
-            "create_time": "20220722",
+            "create_time": "2022/07/22",
             "gender": "男性",
             "job_ads": "テスト求人",
             "job_id": "1",
             "memo": [
                 {
-                    "create_time": "20220722",
+                    "create_time": "2022/07/22",
                     "creater": "テストくん",
                     "memo": "ちゃんと勉強してそう"
                 }
