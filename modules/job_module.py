@@ -50,21 +50,25 @@ class JobModule(BaseModule):
                         ProgressMaster
                     ).join(
                         ProgressMaster,
-                        ProgressInfo.progress_id == ProgressMaster.progress_id
+                        (ProgressInfo.progress_id
+                            == ProgressMaster.progress_id)
                     ).join(
                         ProgressResult,
-                        ProgressInfo.result == ProgressResult.progress_result_id
+                        (ProgressInfo.result
+                            == ProgressResult.progress_result_id)
                     ).filter(
                         ProgressInfo.delete_flag == cls.const.DELETE_FLAG_OFF,
                         ProgressInfo.job_id == job_id,
-                        ProgressMaster.delete_flag == cls.const.DELETE_FLAG_OFF,
-                        ProgressResult.delete_flag == cls.const.DELETE_FLAG_OFF,
+                        (ProgressMaster.delete_flag
+                            == cls.const.DELETE_FLAG_OFF),
+                        (ProgressResult.delete_flag
+                            == cls.const.DELETE_FLAG_OFF),
                     )
 
                     progress_all = progress.all()
                     progress_new = progress.order_by(
                         desc(ProgressInfo.progress_id)
-                        ).first()
+                    ).first()
 
                     jm = job.JobMaster
                     ja = job.JobAds
@@ -74,7 +78,7 @@ class JobModule(BaseModule):
 
                     user = cls.get_user(
                         **{"user_id": pi.user_id}
-                        ) or {}
+                    ) or {}
 
                     res_dict = {
                         "job_id": job_id,
@@ -86,7 +90,10 @@ class JobModule(BaseModule):
                         "phase": pm.title,
                         "corr_person": user.get("name"),
                         "progress": [],
-                        "memo": []
+                        "memo": [],
+                        "create_time": cls.date_to_string(
+                            job_seeker.create_time
+                            )
                     }
 
                     for prg in progress_all:
@@ -96,7 +103,7 @@ class JobModule(BaseModule):
 
                         user = cls.get_user(
                             **{"user_id": pi_all.user_id}
-                            ) or {}
+                        ) or {}
 
                         progress_dict = {
                             "phase": pm_all.title,
@@ -109,16 +116,16 @@ class JobModule(BaseModule):
 
                     memos = db_session.query(
                         Memo
-                        ).filter_by(
-                            job_id=job_id,
-                            delete_flag=cls.const.DELETE_FLAG_OFF
-                        ).all()
+                    ).filter_by(
+                        job_id=job_id,
+                        delete_flag=cls.const.DELETE_FLAG_OFF
+                    ).all()
 
                     for memo in memos:
                         create_time = cls.date_to_string(memo.create_time)
                         user = cls.get_user(
                             **{"user_id": memo.changer}
-                            ) or {}
+                        ) or {}
                         memo_dict = {
                             "create_time": create_time,
                             "memo": memo.memo,
